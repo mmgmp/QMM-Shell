@@ -38,91 +38,105 @@ Scope {
 			}
 
             width: parent.width
-            spacing: 15
+            spacing: 20
 
             Repeater {
                 model: server.trackedNotifications
+				
+				delegate: Rectangle {
+					id: card
 
-                delegate: Rectangle {
-                    id: card
-                    required property var modelData
+				    required property var modelData
+				    readonly property int pad: 10
 
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 60
-                    radius: 10
-                    color: "#20232b"
-                    border.color: "#454957"
-                    border.width: 2
+				    Layout.fillWidth: true
+				    Layout.preferredHeight: Math.max(icon.visible ? icon.height : 0, textCol.implicitHeight) + pad * 2
 
-					Rectangle {
-						anchors.right: parent.right
-						anchors.rightMargin: 16
-					    y: -height / 2 + card.border.width / 2
+				    radius: 10
+				    color: "#20232b"
+				    border.color: "#454957"
+				    border.width: 2
 
-					    width: label.implicitWidth + 16
-					    height: label.implicitHeight + 6
-					    radius: 10            // pastilla; usa 6 si la prefieres menos redonda
-					    color: card.color             // tapa la línea de la tarjeta bajo el chip
-					    border.color: "#454957"       // algo más claro que el borde de la tarjeta
-					    border.width: 2
+				    Image {
+				        id: icon
+				        visible: source != ""
+				        source: card.modelData.image || (card.modelData.appIcon ? Quickshell.iconPath(card.modelData.appIcon, true) : "")
+						width: 36
+				        height: 36
+				        sourceSize.width: 64
+				        sourceSize.height: 64
+						fillMode: Image.PreserveAspectFit
+
+				        anchors {
+				            left: parent.left
+				            top: parent.top
+				            margins: card.pad
+						}
+					}
+
+					Column {
+						id: textCol
+						spacing: 5
+			
+						anchors {
+				            left: icon.visible ? icon.right : parent.left
+							leftMargin: icon.visible ? 10 : card.pad
+						    right: parent.right
+							rightMargin: card.pad
+							top: parent.top
+							topMargin: card.pad
+						}
 
 						Text {
+							width: parent.width
+							text: card.modelData.summary
+				            color: "white"
+							font.bold: true
+						    wrapMode: Text.Wrap
+						}
+
+					    Text {
+							width: parent.width
+							text: card.modelData.body
+							color: "#c0c4d0"
+				            wrapMode: Text.Wrap
+							maximumLineCount: 10
+				            elide: Text.ElideRight
+						}
+					}
+
+				    // Etiqueta con borde propio sobre el borde superior
+				    Rectangle {
+				        anchors.right: parent.right
+				        anchors.rightMargin: 16
+				        y: -height / 2 + card.border.width / 2
+
+				        width: label.implicitWidth + 16
+				        height: label.implicitHeight + 8
+				        radius: 10
+				        color: card.color
+				        border.color: "#454957"
+				        border.width: 2
+
+				        Text {
 				            id: label
 				            anchors.centerIn: parent
 				            text: card.modelData.appName
-				            color: "#8b90a0"
+				            color: "#c0c4d0"
 				            font.pixelSize: 11
 				            font.bold: true
-						}
+				        }
 					}
 
-					RowLayout{
-						id: layout
-						anchors.fill: parent
-	                    anchors.margins: 10
-						spacing: 5
-
-						Image {
-							source: card.modelData.image || card.modelData.appIcon || ""
-							sourceSize.width: 60
-				            sourceSize.height: 60
-							Layout.preferredHeight: 36
-							Layout.preferredWidth: 36
-							Layout.alignment: Qt.AlignVCenter
-							visible: source.toString() !== ""
-						}
-
-						ColumnLayout {
-							Layout.fillWidth: true
-							spacing: 5
-
-			                Text {
-				                text: card.modelData.summary
-					            color: "white"
-						        font.bold: true
-							    elide: Text.ElideRight
-								Layout.fillWidth: true
-							}
-
-		                    Text {
-								text: card.modelData.body
-	                            color: "#c0c4d0"
-		                        elide: Text.ElideRight
-			                    Layout.fillWidth: true
-				            }
-					    }
+					TapHandler {
+						onTapped: card.modelData.dismiss()
 					}
-
-					MouseArea {
-						anchors.fill: parent
-	                    onClicked: card.modelData.dismiss()
-		            }
 
 					Timer {
-						interval: 5000
-					    running: true
-						onTriggered: card.modelData.expire()
-					}	
+						interval: 3000
+				        running: true
+				        onTriggered: card.modelData.expire()
+				    }
 				}
 			}
         }
