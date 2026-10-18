@@ -60,7 +60,7 @@ Scope {
 				    Image {
 				        id: icon
 				        visible: source != ""
-				        source: card.modelData.image || (card.modelData.appIcon ? Quickshell.iconPath(card.modelData.appIcon, true) : "")
+						source: card.modelData.image || card.modelData.appIcon || ""
 						width: 36
 				        height: 36
 				        sourceSize.width: 64
