@@ -52,6 +52,16 @@ Scope {
 	                    anchors.margins: 10
 						spacing: 5
 
+						Image {
+							source: card.iconSource
+							sourceSize.width: 64
+				            sourceSize.height: 64
+							Layout.preferredHeight: 36
+							Layout.preferredWidth: 36
+							Layout.alignment: Qt.AlignVCenter
+							visible: source.toString() !== ""
+						}
+
 						ColumnLayout {
 							Layout.fillWidth: true
 							spacing: 5
@@ -71,18 +81,19 @@ Scope {
 			                    Layout.fillWidth: true
 				            }
 					    }
-
-						MouseArea {
-							anchors.fill: parent
-	                        onClicked: card.modelData.dismiss()
-		                }
-
-						Timer {
-							interval: 5000
-					        running: true
-						    onTriggered: card.modelData.expire()
-						}
+					
 					}
+
+					MouseArea {
+						anchors.fill: parent
+	                    onClicked: card.modelData.dismiss()
+		            }
+
+					Timer {
+						interval: 5000
+					    running: true
+						onTriggered: card.modelData.expire()
+					}	
 				}
 			}
         }
