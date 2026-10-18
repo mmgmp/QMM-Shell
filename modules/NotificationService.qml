@@ -53,9 +53,9 @@ Scope {
 						spacing: 5
 
 						Image {
-							source: card.iconSource
-							sourceSize.width: 64
-				            sourceSize.height: 64
+							source: card.modelData.image || card.modelData.appIcon || ""
+							sourceSize.width: 60
+				            sourceSize.height: 60
 							Layout.preferredHeight: 36
 							Layout.preferredWidth: 36
 							Layout.alignment: Qt.AlignVCenter
