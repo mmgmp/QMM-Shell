@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 
 PanelWindow {
+	id: bar
 
 	implicitHeight: 33
 	color: "transparent"
@@ -38,6 +39,12 @@ PanelWindow {
 			anchors.margins: 8
 			Item {
 				Layout.fillWidth: true
+
+				NiriWorkspaces {
+				    anchors.left: parent.left
+			        anchors.verticalCenter: parent.verticalCenter
+			        output: bar.screen ? bar.screen.name : ""
+			    }
 			}
 
 
