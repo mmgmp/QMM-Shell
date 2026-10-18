@@ -23,7 +23,7 @@ Scope {
         margins { top: 5; right: 15 }
 
         implicitWidth: 340
-        implicitHeight: Math.max(1, column.implicitHeight + 8)
+        implicitHeight: Math.max(1, column.implicitHeight + 15)
 
         color: "transparent"
 
@@ -47,7 +47,7 @@ Scope {
 					id: card
 
 				    required property var modelData
-				    readonly property int pad: 10
+				    readonly property int pad: 12
 
 				    Layout.fillWidth: true
 				    Layout.preferredHeight: Math.max(icon.visible ? icon.height : 0, textCol.implicitHeight) + pad * 2
