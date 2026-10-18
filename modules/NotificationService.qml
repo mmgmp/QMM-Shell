@@ -29,6 +29,14 @@ Scope {
 
         ColumnLayout {
             id: column
+
+			anchors {
+				top: parent.top
+		        left: parent.left
+		        right: parent.right
+		        topMargin: 12
+			}
+
             width: parent.width
             spacing: 10
 
@@ -40,11 +48,33 @@ Scope {
                     required property var modelData
 
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 48
+                    Layout.preferredHeight: 60
                     radius: 10
                     color: "#20232b"
                     border.color: "#454957"
                     border.width: 2
+
+					Rectangle {
+						anchors.right: parent.right
+						anchors.rightMargin: 16
+					    y: -height / 2 + card.border.width / 2
+
+					    width: label.implicitWidth + 16
+					    height: label.implicitHeight + 6
+					    radius: height / 2            // pastilla; usa 6 si la prefieres menos redonda
+					    color: card.color             // tapa la línea de la tarjeta bajo el chip
+					    border.color: "#454957"       // algo más claro que el borde de la tarjeta
+					    border.width: 2
+
+						Text {
+				            id: label
+				            anchors.centerIn: parent
+				            text: card.modelData.appName
+				            color: "#8b90a0"
+				            font.pixelSize: 11
+				            font.bold: true
+						}
+					}
 
 					RowLayout{
 						id: layout
@@ -81,7 +111,6 @@ Scope {
 			                    Layout.fillWidth: true
 				            }
 					    }
-					
 					}
 
 					MouseArea {
