@@ -20,11 +20,17 @@ PanelWindow {
 	}
 
 	Rectangle{
-	    color: "#18181a"
 		radius: 10
 		border.width: 2
         border.color: "#505050"
 		anchors.fill: parent
+
+		gradient: Gradient {
+		    orientation: Gradient.Vertical
+			GradientStop { position: 0.0; color: "#8a8a90" }
+			GradientStop { position: 0.3; color: "#18181a" }
+			GradientStop { position: 1.0; color: "#18181a" }
+		}
 
 		RowLayout {
 

@@ -53,9 +53,16 @@ Scope {
 				    Layout.preferredHeight: Math.max(icon.visible ? icon.height : 0, textCol.implicitHeight) + pad * 2
 
 				    radius: 10
-				    color: "#20232b"
+				    //color: "#18181a"
 				    border.color: "#454957"
 				    border.width: 2
+
+					gradient: Gradient {
+		                orientation: Gradient.Vertical      // o Gradient.Horizontal
+						GradientStop { position: 0.0; color: "#8a8a90" }
+						GradientStop { position: 0.3; color: "#18181a" }
+						GradientStop { position: 1.0; color: "#18181a" }
+					}
 
 				    Image {
 				        id: icon
@@ -105,28 +112,28 @@ Scope {
 						}
 					}
 
-				    // Etiqueta con borde propio sobre el borde superior
-				    Rectangle {
-				        anchors.right: parent.right
-				        anchors.rightMargin: 16
-				        y: -height / 2 + card.border.width / 2
+					// Etiqueta con borde propio sobre el borde superior
+//					Rectangle {
+//						anchors.right: parent.right
+//						anchors.rightMargin: 16
+//				        y: -height / 2 + card.border.width / 2
 
-				        width: label.implicitWidth + 16
-				        height: label.implicitHeight + 8
-				        radius: 10
-				        color: card.color
-				        border.color: "#454957"
-				        border.width: 2
-
-				        Text {
-				            id: label
-				            anchors.centerIn: parent
-				            text: card.modelData.appName
-				            color: "#c0c4d0"
-				            font.pixelSize: 11
-				            font.bold: true
-				        }
-					}
+//				        width: label.implicitWidth + 20
+//				        height: label.implicitHeight + 8
+//				        radius: card.radius
+//				        color: card.color
+//				        border.color: card.border.color
+//				        border.width: card.border.width
+//
+//				        Text {
+//				            id: label
+//				            anchors.centerIn: parent
+//				            text: card.modelData.appName
+//				            color: "#c0c4d0"
+//				            font.pixelSize: 11
+//				            font.bold: true
+//				        }
+//					}
 
 					TapHandler {
 						onTapped: card.modelData.dismiss()
