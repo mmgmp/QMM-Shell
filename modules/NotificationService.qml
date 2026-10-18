@@ -20,7 +20,7 @@ Scope {
         id: popup
 
         anchors { top: true; right: true }
-        margins { top: 20; right: 20 }
+        margins { top: 5; right: 15 }
 
         implicitWidth: 340
         implicitHeight: Math.max(1, column.implicitHeight + 8)
@@ -38,7 +38,7 @@ Scope {
 			}
 
             width: parent.width
-            spacing: 10
+            spacing: 15
 
             Repeater {
                 model: server.trackedNotifications
@@ -61,7 +61,7 @@ Scope {
 
 					    width: label.implicitWidth + 16
 					    height: label.implicitHeight + 6
-					    radius: height / 2            // pastilla; usa 6 si la prefieres menos redonda
+					    radius: 10            // pastilla; usa 6 si la prefieres menos redonda
 					    color: card.color             // tapa la línea de la tarjeta bajo el chip
 					    border.color: "#454957"       // algo más claro que el borde de la tarjeta
 					    border.width: 2
