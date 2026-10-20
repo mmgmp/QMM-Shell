@@ -15,7 +15,7 @@ Text {
 	PwObjectTracker { objects: [root.sink] }
 
 	text: "  " + Math.round(volume * 100) + "%"
-	color: muted ? "#8a8a90" : "white"
+	color: muted ? Config.colors.disabled : Config.colors.text
 
     font { pixelSize: Config.bar.fontSize; bold: true }
 

@@ -114,7 +114,7 @@ Row {
                 width: parent.width
                 height: parent.height
                 radius: height / 2
-                color: pill.active ? "#ffffff" : "transparent"
+                color: pill.active ? Config.colors.text : "transparent"
 
                 Behavior on color { ColorAnimation { duration: 150 } }
             }
@@ -125,9 +125,9 @@ Row {
                 text: pill.ws.idx ? root.toRoman(pill.ws.idx) : ""
                 font.pixelSize: Config.bar.fontSize
                 font.bold: true
-                color: pill.active ? "#18181a"
-                     : pill.occupied ? "#d0d0d5"
-                     : "#6a6a70"
+                color: pill.active ? Config.colors.background
+                     : pill.occupied ? Config.colors.text
+                     : Config.colors.disabled
 
                 Behavior on color { ColorAnimation { duration: 150 } }
             }

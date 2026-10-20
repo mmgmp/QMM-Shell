@@ -1,7 +1,8 @@
 const colors = {
-	clock: "white",
 	background: "#18181a",
 	border: "#505050",
+	disabled: "grey",
+	text: "white",
 }
 
 const global = {

@@ -2,14 +2,17 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
-import Quickshell.Widgets
 
 import "../config.js" as Config
 
 Scope {
 	id: root
 
-	// Bind the pipewire node so its volume will be tracked
+	readonly property bool muted: Pipewire.defaultAudioSink?.audio.muted ?? false
+	readonly property color fg: muted ? Config.colors.disabled : Config.colors.text
+
+	property bool shouldShowOsd: false
+
 	PwObjectTracker {
 		objects: [ Pipewire.defaultAudioSink ]
 	}
@@ -21,9 +24,12 @@ Scope {
 			root.shouldShowOsd = true;
 			hideTimer.restart();
 		}
-	}
 
-	property bool shouldShowOsd: false
+		function onMutedChanged() {
+			root.shouldShowOsd = true;
+			hideTimer.restart();
+		}
+	}
 
 	Timer {
 		id: hideTimer
@@ -31,16 +37,10 @@ Scope {
 		onTriggered: root.shouldShowOsd = false
 	}
 
-	// The OSD window will be created and destroyed based on shouldShowOsd.
-	// PanelWindow.visible could be set instead of using a loader, but using
-	// a loader will reduce the memory overhead when the window isn't open.
 	LazyLoader {
 		active: root.shouldShowOsd
 
 		PanelWindow {
-			// Since the panel's screen is unset, it will be picked by the compositor
-			// when the window is created. Most compositors pick the current active monitor.
-
 			anchors.bottom: true
 			margins.bottom: screen.height / 8
 			exclusiveZone: 0
@@ -49,16 +49,14 @@ Scope {
 			implicitHeight: 50
 			color: "transparent"
 
-			// An empty click mask prevents the window from blocking mouse events.
 			mask: Region {}
 
 			Rectangle {
 				anchors.fill: parent
 				radius: Config.global.borderRadius
 				color: Config.colors.background
-			    border.color: Config.colors.border
-			    border.width: Config.global.borderWidth
-
+				border.color: Config.colors.border
+				border.width: Config.global.borderWidth
 
 				RowLayout {
 					anchors {
@@ -69,14 +67,14 @@ Scope {
 
 					Text {
 						text: " "
-						color: "white"
+						color: root.fg
 						font.pixelSize: 30
+						Layout.preferredWidth: 36
+						horizontalAlignment: Text.AlignHCenter
 					}
 
 					Rectangle {
-						// Stretches to fill all left-over space
 						Layout.fillWidth: true
-
 						implicitHeight: 10
 						radius: 20
 						color: "#50ffffff"
@@ -90,6 +88,7 @@ Scope {
 
 							implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
 							radius: parent.radius
+							color: root.fg
 						}
 					}
 				}
