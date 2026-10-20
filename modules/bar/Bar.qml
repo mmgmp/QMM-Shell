@@ -38,7 +38,8 @@ PanelWindow {
 		RowLayout {
 
 			anchors.fill: parent
-			anchors.margins: 8
+			anchors.leftMargin: 16
+			anchors.rightMargin: 16
 
 			Item {
 				Layout.fillWidth: true
