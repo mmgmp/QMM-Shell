@@ -67,7 +67,9 @@ PanelWindow {
 				Row  {
 					anchors.right: parent.right
 					anchors.verticalCenter: parent.verticalCenter
-					spacing: 8
+					spacing: 15
+
+					Tray {}
 
 					Volume {}
 
