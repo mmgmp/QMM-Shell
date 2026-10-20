@@ -1,100 +1,92 @@
-import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
+import Quickshell.Services.Pipewire
+import Quickshell.Widgets
 
-PanelWindow {
-	id: osd
+Scope {
+	id: root
 
-	// Se muestra al cambiar el volumen y se oculta solo tras `timeout` ms
-	property int timeout: 1500
-	property bool shown: false
-
-	function show() {
-		shown = true
-		hideTimer.restart()
-	}
-
-	// La ventana sigue visible mientras dura el fade-out
-	visible: shown || card.opacity > 0
-	color: "transparent"
-
-	implicitWidth: 260
-	implicitHeight: 56
-
-	// Solo anclado abajo => centrado horizontalmente
-	anchors.bottom: true
-	margins.bottom: 80
-
-	// No reserva espacio ni captura clics
-	exclusionMode: ExclusionMode.Ignore
-	mask: Region {}
-
-	Timer {
-		id: hideTimer
-		interval: osd.timeout
-		onTriggered: osd.shown = false
+	// Bind the pipewire node so its volume will be tracked
+	PwObjectTracker {
+		objects: [ Pipewire.defaultAudioSink ]
 	}
 
 	Connections {
-		target: Audio
-		function onVolumeChanged() { osd.show() }
+		target: Pipewire.defaultAudioSink?.audio
+
+		function onVolumeChanged() {
+			root.shouldShowOsd = true;
+			hideTimer.restart();
+		}
 	}
 
-	Rectangle {
-		id: card
-		anchors.fill: parent
-		radius: 10
-		border.width: 2
-		border.color: "#505050"
-		opacity: osd.shown ? 1 : 0
+	property bool shouldShowOsd: false
 
-		Behavior on opacity {
-			NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
-		}
+	Timer {
+		id: hideTimer
+		interval: 1000
+		onTriggered: root.shouldShowOsd = false
+	}
 
-		gradient: Gradient {
-			orientation: Gradient.Vertical
-			GradientStop { position: 0.0; color: "#8a8a90" }
-			GradientStop { position: 0.3; color: "#18181a" }
-			GradientStop { position: 1.0; color: "#18181a" }
-		}
+	// The OSD window will be created and destroyed based on shouldShowOsd.
+	// PanelWindow.visible could be set instead of using a loader, but using
+	// a loader will reduce the memory overhead when the window isn't open.
+	LazyLoader {
+		active: root.shouldShowOsd
 
-		RowLayout {
-			anchors.fill: parent
-			anchors.leftMargin: 16
-			anchors.rightMargin: 16
-			spacing: 12
+		PanelWindow {
+			// Since the panel's screen is unset, it will be picked by the compositor
+			// when the window is created. Most compositors pick the current active monitor.
 
-			Text {
-				text: "Vol"
-				color: "white"
-			}
+			anchors.bottom: true
+			margins.bottom: screen.height / 8
+			exclusiveZone: 0
 
-			// Barra de progreso
+			implicitWidth: 400
+			implicitHeight: 40
+			color: "transparent"
+
+			// An empty click mask prevents the window from blocking mouse events.
+			mask: Region {}
+
 			Rectangle {
-				Layout.fillWidth: true
-				Layout.alignment: Qt.AlignVCenter
-				implicitHeight: 6
-				radius: 3
-				color: "#303034"
+				anchors.fill: parent
+				radius: 10
+				color: "#80000000"
 
-				Rectangle {
-					height: parent.height
-					radius: parent.radius
-					width: parent.width * Math.min(Audio.volume, 1)
-					color: "white"
+				RowLayout {
+					anchors {
+						fill: parent
+						leftMargin: 10
+						rightMargin: 15
+					}
 
-					Behavior on width {
-						NumberAnimation { duration: 80 }
+					IconImage {
+						implicitSize: 30
+						source: Quickshell.iconPath("audio-volume-high-symbolic")
+					}
+
+					Rectangle {
+						// Stretches to fill all left-over space
+						Layout.fillWidth: true
+
+						implicitHeight: 10
+						radius: 20
+						color: "#50ffffff"
+
+						Rectangle {
+							anchors {
+								left: parent.left
+								top: parent.top
+								bottom: parent.bottom
+							}
+
+							implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
+							radius: parent.radius
+						}
 					}
 				}
-			}
-
-			Text {
-				text: Math.round(Audio.volume * 100) + "%"
-				color: "white"
-				Layout.minimumWidth: 36
-				horizontalAlignment: Text.AlignRight
 			}
 		}
 	}

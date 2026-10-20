@@ -6,4 +6,5 @@ import "modules/bar"
 ShellRoot {
 	Bar {}
 	NotificationService {}
+	VolumeOSD {}
 }
