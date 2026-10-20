@@ -135,7 +135,7 @@ Scope {
 					}
 
 					Timer {
-						interval: Config.notifications.timeot
+						interval: Config.notifications.timeout
 				        running: true
 				        onTriggered: card.modelData.expire()
 				    }

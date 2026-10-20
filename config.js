@@ -15,5 +15,5 @@ const bar = {
 }
 
 const notifications = {
-	timeout: 10000,
+	timeout: 5000,
 }
