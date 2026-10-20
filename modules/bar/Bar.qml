@@ -37,6 +37,7 @@ PanelWindow {
 
 			anchors.fill: parent
 			anchors.margins: 8
+
 			Item {
 				Layout.fillWidth: true
 
