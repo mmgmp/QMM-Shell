@@ -3,6 +3,8 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Notifications
 
+import "../config.js" as Config
+
 Scope {
     id: root
 
@@ -140,7 +142,7 @@ Scope {
 					}
 
 					Timer {
-						interval: 5000
+						interval: Config.notifications.timeot
 				        running: true
 				        onTriggered: card.modelData.expire()
 				    }
