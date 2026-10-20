@@ -19,9 +19,6 @@ Row {
 			// Ocultar entradas sin icono o en estado Passive (udiskie en modo auto)
 			visible: modelData.icon !== "" && modelData.status !== Status.Passive
 
-			// Depuración: qué items hay en la bandeja
-			Component.onCompleted: console.log("tray item -> id:", modelData.id, "| title:", modelData.title, "| icon:", modelData.icon)
-
 			Image {
 				anchors.fill: parent
 				source: trayItem.modelData.icon
