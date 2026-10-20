@@ -1,12 +1,12 @@
 const colors = {
-
+	clock: "white",
 }
 
 const bar = {
-	height: 33,
-	fontSize: 16,
+	height: 30,
+	fontSize: 14,
 }
 
 const notifications = {
-	timeout = 5000,
+	timeout: 5000,
 }

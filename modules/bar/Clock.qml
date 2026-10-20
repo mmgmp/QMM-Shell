@@ -1,14 +1,16 @@
 import Quickshell
 import QtQuick
 
+import "../../config.js" as Config
+
 Text {
 	SystemClock {
 		id: clock
 		precision: SystemClock.Minutes
 	}
 
-    color: "white"
-    font { pixelSize: 14; bold: true }
+    color: Config.colors.clock
+    font { pixelSize: Config.bar.fontSize; bold: true }
 
 	text: Qt.formatDateTime(clock.date, "d MMM HH:mm")
 }

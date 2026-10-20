@@ -2,10 +2,12 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
+import "../../config.js" as Config
+
 PanelWindow {
 	id: bar
 
-	implicitHeight: 33
+	implicitHeight: Config.bar.height
 	color: "transparent"
 
     anchors {

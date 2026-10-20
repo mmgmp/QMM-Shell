@@ -2,6 +2,8 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
+import "../../config.js" as Config
+
 // Módulo de workspaces para niri. Todo en un solo archivo:
 // IPC (event-stream) + lógica + vista.
 Row {
@@ -121,7 +123,7 @@ Row {
                 id: label
                 anchors.centerIn: parent
                 text: pill.ws.idx ? root.toRoman(pill.ws.idx) : ""
-                font.pixelSize: 14
+                font.pixelSize: Config.bar.fontSize
                 font.bold: true
                 color: pill.active ? "#18181a"
                      : pill.occupied ? "#d0d0d5"
