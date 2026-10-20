@@ -46,7 +46,7 @@ Scope {
 			exclusiveZone: 0
 
 			implicitWidth: 400
-			implicitHeight: 40
+			implicitHeight: 50
 			color: "transparent"
 
 			// An empty click mask prevents the window from blocking mouse events.
@@ -55,7 +55,7 @@ Scope {
 			Rectangle {
 				anchors.fill: parent
 				radius: Config.global.borderRadius
-				color: "#80000000"
+				color: Config.colors.background
 			    border.color: Config.colors.border
 			    border.width: Config.global.borderWidth
 
@@ -67,10 +67,11 @@ Scope {
 						rightMargin: 15
 					}
 
-					//IconImage {
-					//	implicitSize: 30
-					//	source: Quickshell.iconPath("audio-volume-high-symbolic")
-					//}
+					Text {
+						text: " "
+						color: "white"
+						font.pixelSize: 30
+					}
 
 					Rectangle {
 						// Stretches to fill all left-over space
