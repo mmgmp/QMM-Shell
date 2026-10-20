@@ -69,15 +69,8 @@ PanelWindow {
 					anchors.verticalCenter: parent.verticalCenter
 					spacing: 8
 
-					Text {
-						text: '${Math.round(Audio.volume * 100)}%'
-						color: "white"
-					}
+					Volume {}
 
-					Text {
-						text: "Vol"
-						color: "white"
-					}
 				}
 			}
 		}
