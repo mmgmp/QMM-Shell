@@ -22,6 +22,7 @@ Text {
 	MouseArea {
 		anchors.fill: parent
 		acceptedButtons: Qt.LeftButton | Qt.RightButton
+		cursorShape: Qt.PointingHandCursor
 
         // Izquierdo: abrir pavucontrol · Derecho: silenciar / activar
         onClicked: mouse => {
