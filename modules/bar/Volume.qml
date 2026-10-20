@@ -1,3 +1,4 @@
+import Quickshell
 import QtQuick
 import Quickshell.Services.Pipewire
 
@@ -20,10 +21,16 @@ Text {
 
 	MouseArea {
 		anchors.fill: parent
-		acceptedButtons: Qt.LeftButton
+		acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-		// Clic: silenciar / activar
-		onClicked: if (root.sink?.audio) root.sink.audio.muted = !root.muted
+        // Izquierdo: abrir pavucontrol · Derecho: silenciar / activar
+        onClicked: mouse => {
+			if (mouse.button === Qt.LeftButton) {
+				Quickshell.execDetached(["sh", "-c", "pavucontrol"])
+            } else if (root.sink?.audio) {
+				root.sink.audio.muted = !root.muted
+            }
+		}
 
 		// Rueda: ±5 %
 		onWheel: wheel => {
