@@ -3,7 +3,7 @@ const colors = {
 }
 
 const bar = {
-	height: 30,
+	height: 33,
 	fontSize: 14,
 }
 
