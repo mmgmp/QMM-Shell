@@ -54,17 +54,10 @@ Scope {
 				    Layout.fillWidth: true
 				    Layout.preferredHeight: Math.max(icon.visible ? icon.height : 0, textCol.implicitHeight) + pad * 2
 
-				    radius: 10
-				    //color: "#18181a"
-				    border.color: "#454957"
-				    border.width: 2
-
-					gradient: Gradient {
-		                orientation: Gradient.Vertical      // o Gradient.Horizontal
-						GradientStop { position: 0.0; color: "#8a8a90" }
-						GradientStop { position: 0.3; color: "#18181a" }
-						GradientStop { position: 1.0; color: "#18181a" }
-					}
+				    radius: Config.global.borderRadius
+				    color: Config.colors.background
+				    border.color: Config.colors.border
+				    border.width: Config.global.borderWidth
 
 				    Image {
 				        id: icon

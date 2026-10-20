@@ -4,6 +4,8 @@ import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
 
+import "../config.js" as Config
+
 Scope {
 	id: root
 
@@ -52,8 +54,11 @@ Scope {
 
 			Rectangle {
 				anchors.fill: parent
-				radius: 10
+				radius: Config.global.borderRadius
 				color: "#80000000"
+			    border.color: Config.colors.border
+			    border.width: Config.global.borderWidth
+
 
 				RowLayout {
 					anchors {
@@ -62,10 +67,10 @@ Scope {
 						rightMargin: 15
 					}
 
-					IconImage {
-						implicitSize: 30
-						source: Quickshell.iconPath("audio-volume-high-symbolic")
-					}
+					//IconImage {
+					//	implicitSize: 30
+					//	source: Quickshell.iconPath("audio-volume-high-symbolic")
+					//}
 
 					Rectangle {
 						// Stretches to fill all left-over space

@@ -1,5 +1,12 @@
 const colors = {
 	clock: "white",
+	background: "#18181a",
+	border: "#505050",
+}
+
+const global = {
+	borderWidth: 2,
+	borderRadius: 10,
 }
 
 const bar = {
@@ -8,5 +15,5 @@ const bar = {
 }
 
 const notifications = {
-	timeout: 5000,
+	timeout: 10000,
 }

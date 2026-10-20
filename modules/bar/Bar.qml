@@ -23,9 +23,9 @@ PanelWindow {
 	}
 
 	Rectangle{
-		radius: 10
-		border.width: 2
-        border.color: "#505050"
+		radius: Config.global.borderRadius
+		border.width: Config.global.borderWidth
+        border.color: Config.colors.border
 		anchors.fill: parent
 
 		gradient: Gradient {
