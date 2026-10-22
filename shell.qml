@@ -15,4 +15,5 @@ ShellRoot {
 	Bar {}
 	NotificationService {}
 	VolumeOSD {}
+	Polkit {}
 }
