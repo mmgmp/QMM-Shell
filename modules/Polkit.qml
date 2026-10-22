@@ -30,6 +30,7 @@ Scope {
             radius: Config.global.borderRadius
             color: Config.colors.background
             border.color: Config.colors.border
+		    border.width: Config.global.borderWidth
 
             ColumnLayout {
                 id: col
