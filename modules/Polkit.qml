@@ -5,6 +5,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "../config.js" as Config
+
 Scope {
     id: root
 
@@ -25,9 +27,9 @@ Scope {
 
         Rectangle {
             anchors.fill: parent
-            radius: 12
-            color: "#1e1e2e"          // sustitúyelo por tu tema, ver abajo
-            border.color: "#45475a"
+            radius: Config.global.borderRadius
+            color: Config.colors.background
+            border.color: Config.colors.border
 
             ColumnLayout {
                 id: col
