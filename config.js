@@ -17,4 +17,6 @@ const bar = {
 
 const notifications = {
 	timeout: 5000,
+	fontSize1: 16,
+	fontSize2: 14,
 }
