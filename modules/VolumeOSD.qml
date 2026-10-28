@@ -12,20 +12,42 @@ Scope {
 	readonly property color fg: muted ? Config.colors.disabled : Config.colors.text
 
 	property bool shouldShowOsd: false
+	// Evita mostrar el OSD por los cambios iniciales de valores
+	property bool ready: false
 
 	PwObjectTracker {
 		objects: [ Pipewire.defaultAudioSink ]
+	}
+
+	// Al cambiar de sink, volver a esperar a que se estabilicen los valores
+	Connections {
+		target: Pipewire
+
+		function onDefaultAudioSinkChanged() {
+			root.ready = false;
+			readyTimer.restart();
+		}
+	}
+
+	// Periodo de gracia inicial
+	Timer {
+		id: readyTimer
+		interval: 1500
+		running: true
+		onTriggered: root.ready = true
 	}
 
 	Connections {
 		target: Pipewire.defaultAudioSink?.audio
 
 		function onVolumeChanged() {
+			if (!root.ready) return;
 			root.shouldShowOsd = true;
 			hideTimer.restart();
 		}
 
 		function onMutedChanged() {
+			if (!root.ready) return;
 			root.shouldShowOsd = true;
 			hideTimer.restart();
 		}
