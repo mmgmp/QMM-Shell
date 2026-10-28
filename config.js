@@ -1,3 +1,5 @@
+.pragma library
+
 const colors = {
 	background: "#18181a",
 	border: "#505050",
