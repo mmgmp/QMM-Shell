@@ -12,7 +12,15 @@ ShellRoot {
 		onFileChanged: Quickshell.reload(true)
 	}
 
-	Bar {}
+	Variants {
+		model: Quickshell.screens
+
+		Bar {
+			required property var modelData
+			screen: modelData
+		}
+	}
+
 	NotificationService {}
 	VolumeOSD {}
 	Polkit {}
