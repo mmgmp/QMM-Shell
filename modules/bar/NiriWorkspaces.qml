@@ -132,7 +132,11 @@ Row {
                 Behavior on color { ColorAnimation { duration: 150 } }
             }
 
-            HoverHandler { id: hover }
+			HoverHandler { 
+				id: hover 
+				cursorShape: Qt.PointingHandCursor
+			}
+
             TapHandler { onTapped: root.focusWorkspace(pill.ws.idx) }
         }
     }
