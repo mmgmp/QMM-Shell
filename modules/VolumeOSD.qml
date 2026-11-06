@@ -2,61 +2,50 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
+import Quickshell.Wayland
 
 import "../config.js" as Config
 
 Scope {
 	id: root
 
-	readonly property bool muted: Pipewire.defaultAudioSink?.audio.muted ?? false
-	readonly property color fg: muted ? Config.colors.disabled : Config.colors.text
+	readonly property var audio: Pipewire.defaultAudioSink?.audio
+	readonly property color fg: audio?.muted ? Config.colors.disabled : Config.colors.text
 
 	property bool shouldShowOsd: false
-	// Evita mostrar el OSD por los cambios iniciales de valores
-	property bool ready: false
 
 	PwObjectTracker {
 		objects: [ Pipewire.defaultAudioSink ]
 	}
 
-	// Al cambiar de sink, volver a esperar a que se estabilicen los valores
-	Connections {
-		target: Pipewire
-
-		function onDefaultAudioSinkChanged() {
-			root.ready = false;
-			readyTimer.restart();
-		}
-	}
-
-	// Periodo de gracia inicial
+	// Periodo de gracia: ignora los cambios iniciales y los de cambio de sink
 	Timer {
-		id: readyTimer
+		id: graceTimer
 		interval: 1500
 		running: true
-		onTriggered: root.ready = true
-	}
-
-	Connections {
-		target: Pipewire.defaultAudioSink?.audio
-
-		function onVolumeChanged() {
-			if (!root.ready) return;
-			root.shouldShowOsd = true;
-			hideTimer.restart();
-		}
-
-		function onMutedChanged() {
-			if (!root.ready) return;
-			root.shouldShowOsd = true;
-			hideTimer.restart();
-		}
 	}
 
 	Timer {
 		id: hideTimer
 		interval: 1000
 		onTriggered: root.shouldShowOsd = false
+	}
+
+	function show() {
+		if (graceTimer.running) return;
+		shouldShowOsd = true;
+		hideTimer.restart();
+	}
+
+	Connections {
+		target: Pipewire
+		function onDefaultAudioSinkChanged() { graceTimer.restart() }
+	}
+
+	Connections {
+		target: root.audio
+		function onVolumeChanged() { root.show() }
+		function onMutedChanged() { root.show() }
 	}
 
 	LazyLoader {
@@ -66,6 +55,7 @@ Scope {
 			anchors.bottom: true
 			margins.bottom: screen.height / 8
 			exclusiveZone: 0
+			WlrLayershell.layer: WlrLayer.Overlay
 
 			implicitWidth: 400
 			implicitHeight: 50
@@ -108,7 +98,7 @@ Scope {
 								bottom: parent.bottom
 							}
 
-							implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
+							implicitWidth: parent.width * (root.audio?.volume ?? 0)
 							radius: parent.radius
 							color: root.fg
 						}
