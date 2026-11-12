@@ -16,30 +16,23 @@ PanelWindow {
         right: true
     }
 
-	margins {
-		top: 5
-		left: 5
-		right: 5
-	}
-
 	Rectangle{
-		radius: Config.global.borderRadius
-		border.width: Config.global.borderWidth
-        border.color: Config.colors.border
 		anchors.fill: parent
+		color: Config.colors.background
 
-		gradient: Gradient {
-		    orientation: Gradient.Vertical
-			GradientStop { position: 0.0; color: "#8a8a90" }
-			GradientStop { position: 0.3; color: "#18181a" }
-			GradientStop { position: 1.0; color: "#18181a" }
+		Rectangle {
+			anchors.bottom: parent.bottom
+		    anchors.left: parent.left
+		    anchors.right: parent.right
+		    height: Config.global.borderWidth
+		    color: Config.colors.border
 		}
 
 		RowLayout {
 
 			anchors.fill: parent
-			anchors.leftMargin: 16
-			anchors.rightMargin: 18
+			anchors.leftMargin: 10
+			anchors.rightMargin: 12
 
 			Item {
 				Layout.fillWidth: true
