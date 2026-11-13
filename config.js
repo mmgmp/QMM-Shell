@@ -13,7 +13,7 @@ const global = {
 }
 
 const bar = {
-	height: 33,
+	height: 32,
 	fontSize: 14,
 }
 

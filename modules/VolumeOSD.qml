@@ -65,10 +65,10 @@ Scope {
 
 			Rectangle {
 				anchors.fill: parent
-				radius: Config.global.borderRadius
+				radius: 25
 				color: Config.colors.background
-				border.color: Config.colors.border
-				border.width: Config.global.borderWidth
+				//border.color: Config.colors.border
+				//border.width: Config.global.borderWidth
 
 				RowLayout {
 					anchors {
