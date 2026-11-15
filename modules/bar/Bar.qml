@@ -18,7 +18,7 @@ PanelWindow {
 
 	Rectangle{
 		anchors.fill: parent
-		color: Config.colors.background
+		color: Config.colors.bar
 
 		Rectangle {
 			anchors.bottom: parent.bottom

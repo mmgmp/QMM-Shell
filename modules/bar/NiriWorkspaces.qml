@@ -19,9 +19,6 @@ Row {
     readonly property var visibleWorkspaces:
         workspaces.filter(w => output === "" || w.output === output)
 
-    // Píxeles que se sube el fondo (pill) respecto al texto. Ajusta a tu gusto.
-    property int pillOffset: 1
-
     spacing: 6
 
     function toRoman(n) {
@@ -103,21 +100,10 @@ Row {
 
             anchors.verticalCenter: parent.verticalCenter
             height: 17
-            width: label.implicitWidth + 14
+            width: label.implicitWidth + 12
             opacity: hover.hovered && !active ? 0.75 : 1.0
 
             Behavior on width { NumberAnimation { duration: 150; easing.type: Easing.OutCubic } }
-
-            // Fondo: se desplaza hacia arriba pillOffset píxeles
-            Rectangle {
-                y: -root.pillOffset
-                width: parent.width
-                height: parent.height
-                radius: height / 2
-                color: pill.active ? Config.colors.text : "transparent"
-
-                Behavior on color { ColorAnimation { duration: 150 } }
-            }
 
             Text {
                 id: label
@@ -125,8 +111,8 @@ Row {
                 text: pill.ws.idx ? root.toRoman(pill.ws.idx) : ""
                 font.pixelSize: Config.bar.fontSize
                 font.bold: true
-                color: pill.active ? Config.colors.background
-                     : pill.occupied ? Config.colors.text
+                color: pill.active ? Config.colors.text
+                     : pill.occupied ? Config.colors.disabled
                      : Config.colors.disabled
 
                 Behavior on color { ColorAnimation { duration: 150 } }
