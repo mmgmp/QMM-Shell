@@ -2,7 +2,7 @@
 
 const colors = {
 	bar: "#18181a",
-	background: "#3b4252",
+	background: "#18181a",
 	border: "#505050",
 	disabled: "grey",
 	text: "white",

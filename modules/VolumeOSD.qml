@@ -65,7 +65,7 @@ Scope {
 
 			Rectangle {
 				anchors.fill: parent
-				radius: 25
+				radius: height / 2
 				color: Config.colors.background
 				//border.color: Config.colors.border
 				//border.width: Config.global.borderWidth
