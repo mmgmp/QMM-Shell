@@ -101,7 +101,6 @@ Row {
             anchors.verticalCenter: parent.verticalCenter
             height: 17
             width: label.implicitWidth + 12
-            opacity: hover.hovered && !active ? 0.75 : 1.0
 
             Behavior on width { NumberAnimation { duration: 150; easing.type: Easing.OutCubic } }
 
