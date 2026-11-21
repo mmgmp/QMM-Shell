@@ -9,13 +9,14 @@ const colors = {
 }
 
 const global = {
+	fontFamily: "Inter",
 	borderWidth: 2,
 	borderRadius: 10,
 }
 
 const bar = {
 	height: 32,
-	fontSize: 14,
+	fontSize: 15,
 }
 
 const notifications = {

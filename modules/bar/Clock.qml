@@ -9,8 +9,13 @@ Text {
 		precision: SystemClock.Minutes
 	}
 
-    color: Config.colors.text
-    font { pixelSize: Config.bar.fontSize; bold: true }
+	color: Config.colors.text
+
+	font {
+		pixelSize: Config.bar.fontSize
+		bold: true
+		family: Config.global.fontFamily
+	}
 
 	text: Qt.formatDateTime(clock.date, "d MMM HH:mm")
 }

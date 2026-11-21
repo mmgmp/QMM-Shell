@@ -93,8 +93,13 @@ Scope {
 							width: parent.width
 							text: card.modelData.summary
 				            color: "white"
-							font { pixelSize: Config.notifications.fontSize1; bold: true }
 						    wrapMode: Text.Wrap
+
+							font {
+								pixelSize: Config.notifications.fontSize1
+								bold: true
+								family: Config.global.fontFamily
+							}
 						}
 
 					    Text {
@@ -103,8 +108,13 @@ Scope {
 							color: "#c0c4d0"
 				            wrapMode: Text.Wrap
 							maximumLineCount: 10
-							font { pixelSize: Config.notifications.fontSize2 }
 				            elide: Text.ElideRight
+
+							font {
+								pixelSize: Config.notifications.fontSize2	
+								bold: true
+								family: Config.global.fontFamily
+							}
 						}
 					}
 

@@ -17,7 +17,11 @@ Text {
 	text: "  " + Math.round(volume * 100) + "%"
 	color: muted ? Config.colors.disabled : Config.colors.text
 
-    font { pixelSize: Config.bar.fontSize; bold: true }
+	font {
+		pixelSize: Config.bar.fontSize
+		bold: true
+		family: Config.global.fontFamily
+	}
 
 	MouseArea {
 		anchors.fill: parent
