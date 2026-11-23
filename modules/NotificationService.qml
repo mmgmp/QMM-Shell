@@ -118,29 +118,6 @@ Scope {
 						}
 					}
 
-					// Etiqueta con borde propio sobre el borde superior
-//					Rectangle {
-//						anchors.right: parent.right
-//						anchors.rightMargin: 16
-//				        y: -height / 2 + card.border.width / 2
-
-//				        width: label.implicitWidth + 20
-//				        height: label.implicitHeight + 8
-//				        radius: card.radius
-//				        color: card.color
-//				        border.color: card.border.color
-//				        border.width: card.border.width
-//
-//				        Text {
-//				            id: label
-//				            anchors.centerIn: parent
-//				            text: card.modelData.appName
-//				            color: "#c0c4d0"
-//				            font.pixelSize: 11
-//				            font.bold: true
-//				        }
-//					}
-
 					TapHandler {
 						onTapped: card.modelData.dismiss()
 					}

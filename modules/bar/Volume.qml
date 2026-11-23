@@ -14,7 +14,7 @@ Text {
 	// Necesario para que PipeWire exponga volume/muted del sink
 	PwObjectTracker { objects: [root.sink] }
 
-	text: "  " + Math.round(volume * 100) + "%"
+	text: "   " + Math.round(volume * 100) + "%"
 	color: muted ? Config.colors.disabled : Config.colors.text
 
 	font {
