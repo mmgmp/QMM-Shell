@@ -108,7 +108,7 @@ Row {
                 id: label
                 anchors.centerIn: parent
                 text: pill.ws.idx ? root.toRoman(pill.ws.idx) : ""
-                font.pixelSize: Config.bar.fontSize
+                font.pointSize: Config.bar.fontSize
 				font.family: Config.global.fontFamily
                 font.bold: true
                 color: pill.active ? Config.colors.text

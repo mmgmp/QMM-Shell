@@ -16,11 +16,11 @@ const global = {
 
 const bar = {
 	height: 32,
-	fontSize: 15,
+	fontSize: 12,
 }
 
 const notifications = {
 	timeout: 5000,
-	fontSize1: 16,
-	fontSize2: 14,
+	fontSize1: 13,
+	fontSize2: 12,
 }

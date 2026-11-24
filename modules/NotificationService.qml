@@ -96,7 +96,7 @@ Scope {
 						    wrapMode: Text.Wrap
 
 							font {
-								pixelSize: Config.notifications.fontSize1
+								pointSize: Config.notifications.fontSize1
 								bold: true
 								family: Config.global.fontFamily
 							}
@@ -111,7 +111,7 @@ Scope {
 				            elide: Text.ElideRight
 
 							font {
-								pixelSize: Config.notifications.fontSize2	
+								pointSize: Config.notifications.fontSize2	
 								bold: true
 								family: Config.global.fontFamily
 							}

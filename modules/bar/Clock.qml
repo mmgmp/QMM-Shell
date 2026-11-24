@@ -12,7 +12,7 @@ Text {
 	color: Config.colors.text
 
 	font {
-		pixelSize: Config.bar.fontSize
+		pointSize: Config.bar.fontSize
 		bold: true
 		family: Config.global.fontFamily
 	}

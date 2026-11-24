@@ -16,7 +16,7 @@ Text {
         window: QsWindow.window
     }
 
-	font { pixelSize: Config.bar.fontSize }
+	font { pointSize: Config.bar.fontSize }
 
     text: " "
     color: root.inhibited ? Config.colors.text : Config.colors.disabled
